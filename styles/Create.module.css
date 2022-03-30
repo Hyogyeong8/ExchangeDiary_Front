@@ -46,26 +46,6 @@
   line-height: 1.15;
 }
 
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 2rem 0;
-  line-height: 1.5;
-  font-size: 2rem;
-  font-family: Tangerine, cursive, bold;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1100px;
-}
-
 .card {
   margin: 1rem;
   padding: 1.5rem;
@@ -75,56 +55,59 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 300px;
-  height: 20rem;
-}
-
-.addCard {
-  margin: 1rem;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  width: 300px;
-  height: 20rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 800px;
+  height: 40rem;
 }
 
 .card:hover,
 .card:focus,
-.card:active,
-.addCard:hover,
-.addCard:focus,
-.addCard:active {
+.card:active {
   color: maroon;
   border-color: maroon;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.card textarea {
+  border: 0;
+  border-bottom: 1px solid #eaeaea;
+  resize: none;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-.card p {
+.card textarea:focus {
+  outline: none;
+  border-bottom: 2px solid maroon;
+}
+
+.boardTitle {
+  font-size: 1.5rem;
+  height: 2.5rem;
+  display: block;
+  font-weight: bold;
+}
+
+.boardDesc {
+  min-height: 88%;
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /*라인수*/
-  -webkit-box-orient: vertical;
-  overflow: hidden; 
-  text-overflow: ellipsis;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.container button {
+  font-size: 1.5rem;
+  padding: 0.35rem 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: white;
+  color: maroon;
+  border: 2px solid maroon;
+  border-radius: 10px;
+  transition: 0.1s;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
+.container button:hover {
+  background-color: maroon;
+  color: white;
+  border: 2px solid maroon;
 }
