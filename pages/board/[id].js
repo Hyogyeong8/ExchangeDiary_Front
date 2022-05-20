@@ -14,11 +14,13 @@ export default function Home() {
     userId: 0,
   });
 
-  const [comment, setComment] = useState({
+  const [newComment, setNewComment] = useState({
     content: "",
     createdBy: 0,
     BoardId: id,
   })
+
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     getBoard()
@@ -32,6 +34,8 @@ export default function Home() {
     })
     .then(res => {
       setBoard(res.data['board'])
+      setComments(res.data['comments'])
+      console.log(comments)
     }).
     catch(err => console.log(err))
   }
@@ -53,22 +57,27 @@ export default function Home() {
     catch(err => console.log(err))
   }
 
-  const showDate = (d) => {
+  const showDateTime = (d) => {
     const _d = new Date(d);
     return _d.toLocaleString();
   }
 
-  const updateComment = (text)=>{
-    const cp = {...comment}
+  const showDate = (d) => {
+    const _d = new Date(d);
+    return _d.toLocaleDateString();
+  }
+
+  const updateNewComment = (text)=>{
+    const cp = {...newComment}
     cp.content = text
-    setComment(cp)
+    setNewComment(cp)
   }
 
   const send = async ()=>{
-    await axios.post("http://localhost:8000/board/comment", comment)
+    await axios.post("http://localhost:8000/board/comment", newComment)
     .then(function(response){
       console.log(response);
-      window.location.href = ".";
+      window.location.href=`./${id}`
     }).catch(function(error){
       console.log(error);
     })
@@ -92,16 +101,22 @@ export default function Home() {
         </h1>
         <div className={styles.card}>
           <textarea className={styles.boardTitle} value={board.title}></textarea>
-          <div className={styles.date}>{showDate(board.createdAt)}</div>
+          <div className={styles.date}>{showDateTime(board.createdAt)}</div>
           <br/>
           <textarea className={styles.smallBoardDesc} value={board.desc}></textarea>
           <button className={styles.control} onClick={e=>deletion()}>Delete</button>
           <button className={styles.control} onClick={e=>modify()}>Modify</button>
         </div>
         <div className={styles.commentCard}>
-          <textarea className={styles.comment} value={comment.content} onChange={e=>updateComment(e.target.value)}></textarea>
+          <textarea className={styles.comment} value={newComment.content} onChange={e=>updateNewComment(e.target.value)}></textarea>
           <button className={styles.control} onClick={e=>send()}>Send</button>
         </div>
+        {comments.map(com => {
+          return (<div className={styles.commentCard}>
+            <textarea className={styles.comment}>{com.content}</textarea>
+            <div className={styles.date}>{showDate(com.createdAt)}</div>
+          </div>)
+        })}
       </main>
 
       <footer className={styles.footer}>
