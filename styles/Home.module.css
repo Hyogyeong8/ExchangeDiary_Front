@@ -77,6 +77,7 @@
   transition: color 0.15s ease, border-color 0.15s ease;
   width: 300px;
   height: 20rem;
+  position: relative;
 }
 
 .addCard {
@@ -99,6 +100,7 @@
 .addCard:active {
   color: maroon;
   border-color: maroon;
+  cursor: pointer;
 }
 
 .card h2 {
@@ -111,10 +113,17 @@
   font-size: 1.25rem;
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /*라인수*/
+  -webkit-line-clamp: 6; /*라인수*/
   -webkit-box-orient: vertical;
   overflow: hidden; 
   text-overflow: ellipsis;
+}
+
+.date {
+  font-size: 1rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .logo {

@@ -1,8 +1,37 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 
 export default function Home() {
+  
+  const [boards, setBoards] = useState([]);
+
+  useEffect(() => {
+    getBoards()
+  }, [])
+
+  const getBoards = async () => {
+    await axios.get("http://localhost:8000/board/all", {
+    })
+    .then(res => {
+      setBoards(res.data['board'])
+
+    }).
+    catch(err => console.log(err))
+  }
+
+  const movePage = (id) => {
+    window.location.href=`./board/${id}`;
+  }
+
+  const showDate = (d) => {
+    const _d = new Date(d);
+    return _d.toDateString();
+  }
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,32 +56,18 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="./board/create" className={styles.addCard} style={{}}>
+          <a href="/board/create" className={styles.addCard} style={{}}>
             <span className="material-icons md-48" style={{fontSize: '48px'}}>add_circle_outline</span>
           </a>
-      
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p></p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p></p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.Instantly deploy your Next.js site to a public URL with Vercel.Instantly deploy your Next.js site to a public URL with Vercel.Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          
+          {boards.map(board => {
+            return (<div onClick={()=>movePage(board['id'])} className={styles.card}>
+              <h2>{board.title} &rarr;</h2>
+              <p lassName={styles.desc}>{board.desc}</p>
+              <div className={styles.date}>{showDate(board.createdAt)}</div>
+            </div>
+            )
+          })}
         </div>
       </main>
 

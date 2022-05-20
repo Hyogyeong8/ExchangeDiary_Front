@@ -1,14 +1,37 @@
-import styles from '../../styles/Create.module.css'
-import {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import axios from 'axios'
+import styles from '../../../styles/Create.module.css'
+import {useState, useEffect} from 'react'
+import axios from 'axios';
+import {useRouter} from 'next/router';
 
-export default function Create() {
+// https://www.daleseo.com/react-router-nested/ Routing 읽어보기
+// https://youngjinmo.github.io/2021/08/express-crud-rest-api/
+
+export default function Home() {
+  const router = useRouter()
+  const {id} = router.query
   const [board, setBoard] = useState({
     title: "",
     desc: "",
-  })
+    userId: 0,
+  });
+
+  useEffect(() => {
+    getBoard()
+  }, [id])
+
+  const getBoard = async () => {
+    await axios.get("http://localhost:8000/board/", {
+      params: {
+        id: id
+      }
+    })
+    .then(res => {
+      setBoard(res.data['board'])
+    }).
+    catch(err => console.log(err))
+  }
 
   const updateBoardTitle = (text)=>{
     const cp = {...board}
@@ -22,17 +45,16 @@ export default function Create() {
     setBoard(cp)
   }
 
-  const post = async ()=>{
-    await axios.post("http://localhost:8000/board/create", board)
+  const modify = ()=>{
+    axios.patch("http://localhost:8000/board/modify", board)
     .then(function(response){
       console.log(response);
-      alert("Success to create a new post!!");
-      window.location.href = "./..";
+      alert("Success to modify your post!!");
+      window.location.href = `./../${id}`
     }).catch(function(error){
       console.log(error);
     })
   }
-
 
   return (
     <div className={styles.container}>
@@ -55,9 +77,9 @@ export default function Create() {
           <br/>
           <textarea className={styles.boardDesc} value={board.desc} onChange={e=>updateBoardDesc(e.target.value)} placeholder="Description"></textarea>
         </div>
-        <button className={styles.post} onClick={e=>post()}>Post</button>
+        <button className={styles.post} onClick={e=>modify()}>Modify</button>
       </main>
-      
+
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
