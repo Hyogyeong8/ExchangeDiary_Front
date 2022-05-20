@@ -83,6 +83,18 @@ export default function Home() {
     })
   }
 
+  const comDeletion = async (comId) => {
+    await axios.delete("http://localhost:8000/board/comment", {
+      params: {
+        id: comId
+      }
+    })
+    .then(res => {
+      window.location.href = "./.."
+    }).
+    catch(err => console.log(err))
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -103,18 +115,19 @@ export default function Home() {
           <textarea className={styles.boardTitle} value={board.title}></textarea>
           <div className={styles.date}>{showDateTime(board.createdAt)}</div>
           <br/>
-          <textarea className={styles.smallBoardDesc} value={board.desc}></textarea>
+          <textarea className={styles.boardDesc} id={styles.small} value={board.desc}></textarea>
           <button className={styles.control} onClick={e=>deletion()}>Delete</button>
           <button className={styles.control} onClick={e=>modify()}>Modify</button>
         </div>
-        <div className={styles.commentCard}>
+        <div className={styles.card} id={styles.comment}>
           <textarea className={styles.comment} value={newComment.content} onChange={e=>updateNewComment(e.target.value)}></textarea>
           <button className={styles.control} onClick={e=>send()}>Send</button>
         </div>
         {comments.map(com => {
-          return (<div className={styles.commentCard}>
+          return (<div className={styles.card} id={styles.comment}>
             <textarea className={styles.comment}>{com.content}</textarea>
             <div className={styles.date}>{showDate(com.createdAt)}</div>
+            <button className={styles.control} id={styles.commentDel} onClick={e=>comDeletion(com.Id)}>Delete</button>
           </div>)
         })}
       </main>
