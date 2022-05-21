@@ -124,7 +124,7 @@ export default function Home() {
           <button className={styles.control} onClick={e=>send()}>Send</button>
         </div>
         {comments.map(com => {
-          return (<div className={styles.card} id={styles.comment}>
+          return (<div key={com['id']} className={styles.card} id={styles.comment}>
             <textarea className={styles.comment}>{com.content}</textarea>
             <div className={styles.date}>{showDate(com.createdAt)}</div>
             <button className={styles.control} id={styles.commentDel} onClick={e=>comDeletion(com.Id)}>Delete</button>

@@ -65,7 +65,7 @@ export default function Home() {
           </div>
           
           {boards.map(board => {
-            return (<div onClick={()=>movePage(board['id'])} className={styles.card}>
+            return (<div key={board['id']} onClick={()=>movePage(board['id'])} className={styles.card}>
               <h2>{board.title} &rarr;</h2>
               <p lassName={styles.desc}>{board.desc}</p>
               <div className={styles.date}>{showDate(board.createdAt)}</div>
