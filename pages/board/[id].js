@@ -86,13 +86,14 @@ export default function Home() {
   }
 
   const comDeletion = async (comId) => {
+    console.log(comId);
     await axios.delete("/board/comment", {
       params: {
         id: comId
       }
     })
     .then(res => {
-      window.location.href = "./.."
+      window.location.href = `./${id}`
     }).
     catch(err => console.log(err))
   }
@@ -129,7 +130,7 @@ export default function Home() {
           return (<div key={com['id']} className={styles.card} id={styles.comment}>
             <textarea className={styles.comment}>{com.content}</textarea>
             <div className={styles.date}>{showDate(com.createdAt)}</div>
-            <button className={styles.control} id={styles.commentDel} onClick={e=>comDeletion(com.Id)}>Delete</button>
+            <button className={styles.control} id={styles.commentDel} onClick={e=>comDeletion(com.id)}>Delete</button>
           </div>)
         })}
       </main>
