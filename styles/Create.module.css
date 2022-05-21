@@ -35,6 +35,7 @@
 .title:focus,
 .title:active {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .card {

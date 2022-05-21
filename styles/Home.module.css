@@ -35,6 +35,7 @@
 .title:focus,
 .title:active {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .title,
@@ -97,6 +98,11 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /*라인수*/
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
+  text-overflow: ellipsis;
 }
 
 .card p {
