@@ -4,6 +4,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://ssal.sparcs.org:22998/';
+
 export default function Create() {
   const [board, setBoard] = useState({
     title: "",
@@ -23,7 +25,7 @@ export default function Create() {
   }
 
   const post = async ()=>{
-    await axios.post("http://localhost:8000/board/create", board)
+    await axios.post("/board/create", board)
     .then(function(response){
       console.log(response);
       alert("Success to create a new post!!");
@@ -48,7 +50,7 @@ export default function Create() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <a href="../" >Exchange Diary</a>
+          <div onClick={() => {window.location.href="../"}} >Exchange Diary</div>
         </h1>
         <div className={styles.card}>
           <textarea className={styles.boardTitle} value={board.title} onChange={e=>updateBoardTitle(e.target.value)} placeholder="Title"></textarea>
@@ -59,8 +61,8 @@ export default function Create() {
       </main>
       
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+        <div
+          onClick = {() => {window.location.href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"}}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -68,7 +70,7 @@ export default function Create() {
           <span className={styles.logo}>
             <Image src="/color_lens_black_18dp.svg" alt="Vercel Logo" width={22} height={22}/>
           </span>
-        </a>
+        </div>
       </footer>
     </div>
   )
