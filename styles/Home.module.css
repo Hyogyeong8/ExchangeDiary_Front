@@ -19,31 +19,22 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
 }
 
-.title a {
+.title {
   color: maroon;
   text-decoration: none;
   font-family: 'Tangerine', cursive;
   font-size: 96px;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
   margin: 0;
   line-height: 1.15;
+}
+
+.title:hover,
+.title:focus,
+.title:active {
+  text-decoration: underline;
 }
 
 .title,

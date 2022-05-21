@@ -26,6 +26,10 @@ export default function Home() {
     window.location.href=`./board/${id}`;
   }
 
+  const moveCreatePage = () => {
+    // window.location.href="/board/create";
+  }
+
   const showDate = (d) => {
     const _d = new Date(d);
     return _d.toDateString();
@@ -46,7 +50,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <a href="./" >Exchange Diary</a>
+          <div onClick={() => {window.location.href="./";}} >Exchange Diary</div>
         </h1>
 
         <p className={styles.description}>
@@ -56,9 +60,9 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="/board/create" className={styles.addCard} style={{}}>
+          <div onClick={() => {window.location.href="/board/create"}} className={styles.addCard} style={{}}>
             <span className="material-icons md-48" style={{fontSize: '48px'}}>add_circle_outline</span>
-          </a>
+          </div>
           
           {boards.map(board => {
             return (<div onClick={()=>movePage(board['id'])} className={styles.card}>
@@ -72,8 +76,8 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+        <div
+          onClick = {() => {window.location.href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"}}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -81,7 +85,7 @@ export default function Home() {
           <span className={styles.logo}>
             <Image src="/color_lens_black_18dp.svg" alt="Vercel Logo" width={22} height={22}/>
           </span>
-        </a>
+        </div>
       </footer>
     </div>
   )
