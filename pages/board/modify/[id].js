@@ -5,8 +5,9 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import {useRouter} from 'next/router';
 
+axios.defaults.baseURL = 'http://ssal.sparcs.org:22998/';
+
 // https://www.daleseo.com/react-router-nested/ Routing 읽어보기
-// https://youngjinmo.github.io/2021/08/express-crud-rest-api/
 
 export default function Home() {
   const router = useRouter()
@@ -22,7 +23,7 @@ export default function Home() {
   }, [id])
 
   const getBoard = async () => {
-    await axios.get("http://localhost:8000/board/", {
+    await axios.get("/board/", {
       params: {
         id: id
       }
@@ -46,7 +47,7 @@ export default function Home() {
   }
 
   const modify = ()=>{
-    axios.patch("http://localhost:8000/board/modify", board)
+    axios.patch("/board/modify", board)
     .then(function(response){
       console.log(response);
       alert("Success to modify your post!!");

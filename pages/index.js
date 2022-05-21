@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://ssal.sparcs.org:22998/';
+
 export default function Home() {
   
   const [boards, setBoards] = useState([]);
@@ -13,7 +15,7 @@ export default function Home() {
   }, [])
 
   const getBoards = async () => {
-    await axios.get("http://localhost:8000/board/all", {
+    await axios.get("/board/all", {
     })
     .then(res => {
       setBoards(res.data['board'])

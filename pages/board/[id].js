@@ -5,6 +5,8 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import {useRouter} from 'next/router';
 
+axios.defaults.baseURL = 'http://ssal.sparcs.org:22998/';
+
 export default function Home() {
   const router = useRouter()
   const {id} = router.query
@@ -27,7 +29,7 @@ export default function Home() {
   }, [id])
 
   const getBoard = async () => {
-    await axios.get("http://localhost:8000/board/", {
+    await axios.get("/board/", {
       params: {
         id: id
       }
@@ -45,7 +47,7 @@ export default function Home() {
   }
 
   const deletion = async () => {
-    await axios.delete("http://localhost:8000/board/", {
+    await axios.delete("/board/", {
       params: {
         id: id
       }
@@ -74,7 +76,7 @@ export default function Home() {
   }
 
   const send = async ()=>{
-    await axios.post("http://localhost:8000/board/comment", newComment)
+    await axios.post("/board/comment", newComment)
     .then(function(response){
       console.log(response);
       window.location.href=`./${id}`
@@ -84,7 +86,7 @@ export default function Home() {
   }
 
   const comDeletion = async (comId) => {
-    await axios.delete("http://localhost:8000/board/comment", {
+    await axios.delete("/board/comment", {
       params: {
         id: comId
       }
